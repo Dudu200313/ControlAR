@@ -13,13 +13,13 @@ class Dispositivos extends Model
     protected $fillable = [
         'tipo',
         'estado',
-        'temperatura'
+        'temperatura',
     ];
 
 
     public function admin(){
 
-        return $this->hasMany(User::class, 'admin_id', 'id');
+        return $this->hasMany(Ambientes::class, 'admin_id', 'id');
     }
 }
 
