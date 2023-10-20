@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AmbientesController;
+use App\Http\Controllers\DispositivosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +29,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::resource('/ambientes', AmbientesController::class);
+    Route::resource('/dispositivos', DispositivosController::class);
 });

@@ -15,10 +15,10 @@
     </a>
     <div>
         <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-            Login
+           <a href="{{ route('login') }}"> Login</a>
         </button>
         <button class="bg-slate-700 hover:bg-slate-800 text-white font-semibold py-2 px-4 rounded">
-            Junte-se
+          <a href="{{ route('register') }}">  Junte-se </a>
         </button>
     </div>
 </nav>
