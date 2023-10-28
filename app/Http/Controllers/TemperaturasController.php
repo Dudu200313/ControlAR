@@ -14,7 +14,7 @@ class TemperaturasController extends Controller
     {
         //
         $temperatura = Temperaturas::all();
-        return response()->json($temperatura, 200);
+        return response()->json($temperaturas, 200);
     }
 
     /**
@@ -22,7 +22,13 @@ class TemperaturasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['valor' => 'required|string|max:255']);
+
+        $temperaturas = Temperaturas::create([
+            'valor' => $request->input('valor')
+        ]);
+
+        return response()->json(['temperaturas'=> $temperaturas], 201);
     }
 
     /**
@@ -31,21 +37,43 @@ class TemperaturasController extends Controller
     public function show(Temperaturas $temperaturas)
     {
         //
+        $temperaturas = Temperaturas::all();
+        return response()->json($temperaturas, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Temperaturas $temperaturas)
+    public function update(Request $request, Temperaturas $temperaturas, $id)
     {
-        //
+        $this->validate($request,['valor' => 'required|string|max:255']);
+
+        $temperaturas = Temperaturas::find($id);
+
+        if(!$temperaturas){
+            return response()->json(['message' => 'erro no update de temperaturas'], 404);
+        }
+
+        $temperaturas->update($request->all());
+
+
+        return response()->json(['temperaturas' => $temperaturas], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Temperaturas $temperaturas)
+    public function destroy(Temperaturas $temperaturas, $id)
     {
         //
+        $temperaturas = Temperaturas::find($id);
+
+        if(!temperaturas){
+            return response()->json(['message' => 'erro no delete de temperaturas'], 404);
+        }
+
+        $temperaturas->delete();
+
+        return response()->json(['message' => 'excluido com sucesso'], 200);
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('temperaturas', function (Blueprint $table) {
             $table->id();
+            $table->string('valor');
             $table->timestamps();
         });
     }
