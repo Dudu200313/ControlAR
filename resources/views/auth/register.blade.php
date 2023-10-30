@@ -1,8 +1,4 @@
-<nav class="bg-blue-200 p-4 flex justify-between items-center">
-    <div class="text-white text-4xl font-extrabold tracking-wider">
-        Control<span class="text-blue-600">AR</span>
-    </div>
-</nav>
+<x-header-nav />
 
 <x-guest-layout>
     <x-authentication-card>
