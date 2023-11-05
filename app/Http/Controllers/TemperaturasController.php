@@ -13,7 +13,7 @@ class TemperaturasController extends Controller
     public function index()
     {
         //
-        $temperatura = Temperaturas::all();
+        $temperaturas = Temperaturas::all();
         return response()->json($temperaturas, 200);
     }
 
