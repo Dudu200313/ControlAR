@@ -1,12 +1,22 @@
 //#include <Adafruit_ESP8266.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <Carrier.h>
+#include <IRremote.h>
+
+// the Carrier code generator object
+Carrier carrier(MODE_auto,FAN_3,AIRFLOW_dir_1,25,STATE_on);
+
+// the IR emitter object
+IRsend irsend;
+
+ 
 
 #include "SoftwareSerial.h"
 
 // WiFi
-const char *ssid = "XXX"; // Enter your WiFi name
-const char *password = "XXX";  // Enter WiFi password
+const char *ssid = "hahaha"; // Enter your WiFi name
+const char *password = "12345678ian";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "test.mosquitto.org";
@@ -46,6 +56,24 @@ void setup() {
   // publish and subscribe
   client.publish(topic, "oie eae beleza");
   client.subscribe(topic);
+
+
+
+  delay(5000);
+
+    // change the state
+    carrier.setState(STATE_off);
+    // send the code
+    irsend.sendRaw(carrier.codes,CARRIER_BUFFER_SIZE,38);
+	
+    // wait 10 seconds
+    delay(10000);
+
+    // change the state
+    carrier.setState(STATE_on);			
+    // send the code
+    irsend.sendRaw(carrier.codes,CARRIER_BUFFER_SIZE,38);
+    
 }
 
 void callback(char *topic, byte *payload, unsigned int length) {
