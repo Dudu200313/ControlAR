@@ -10,7 +10,7 @@
 </head>
 
 <nav class="bg-blue-200 p-4 flex justify-between items-center">
-    <a href="nadinha" class="text-white text-4xl font-extrabold tracking-wider">
+    <a href="{{ route('dashboard') }}" class="text-white text-4xl font-extrabold tracking-wider">
         Control<span class="text-blue-600">AR</span>
     </a>
     <div>
