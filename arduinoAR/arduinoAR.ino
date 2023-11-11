@@ -1,22 +1,24 @@
-//#include <Adafruit_ESP8266.h>
+
+#include <IRremoteESP8266.h>
+#include <IRsend.h>
+#include <ir_Carrier.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include <Carrier.h>
-#include <IRremote.h>
+//#include <Carrier.h>
+
+//#include <IRremote.h>
+// the IR emitter object
+#include "SoftwareSerial.h"
+//#define pin 12
 
 // the Carrier code generator object
-Carrier carrier(MODE_auto,FAN_3,AIRFLOW_dir_1,25,STATE_on);
-
-// the IR emitter object
-IRsend irsend;
-
- 
-
-#include "SoftwareSerial.h"
-
+//Carrier carrier(MODE_auto,FAN_3,AIRFLOW_dir_1,25,STATE_on);
+//IRsend IRemissor (pin, false, true);
+const uint16_t pin = 12;
+IRCarrierAc64 ac(pin);
 // WiFi
-const char *ssid = "hahaha"; // Enter your WiFi name
-const char *password = "12345678ian";  // Enter WiFi password
+const char *ssid = "DTEL_NARUTO 2.4"; // Enter your WiFi name
+const char *password = "luibento";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "test.mosquitto.org";
@@ -29,6 +31,8 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 void setup() {
+  //instanciar o objeto
+  ac.begin();
   // Set software serial baud to 115200;
   Serial.begin(9600);
   // connecting to a WiFi network
@@ -57,22 +61,14 @@ void setup() {
   client.publish(topic, "oie eae beleza");
   client.subscribe(topic);
 
-
-
   delay(5000);
 
-    // change the state
-    carrier.setState(STATE_off);
-    // send the code
-    irsend.sendRaw(carrier.codes,CARRIER_BUFFER_SIZE,38);
-	
-    // wait 10 seconds
-    delay(10000);
-
-    // change the state
-    carrier.setState(STATE_on);			
-    // send the code
-    irsend.sendRaw(carrier.codes,CARRIER_BUFFER_SIZE,38);
+  //isto serve pra configurar oque vamos enviar no ac.send, procurar funcoes
+  //no arquivo ir_Carrier.cpp
+  ac.setFan(kCarrierAc64FanLow);
+  ac.setMode(kCarrierAc64Cool);
+  ac.setTemp(22);
+  //ac.setSwing(true);
     
 }
 
@@ -89,4 +85,13 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
 void loop() {
   client.loop();
+
+  Serial.println("ligando o ar");
+  ac.on();
+  ac.send();
+  delay(15000);
+
+  Serial.println("desligando o ar");
+  ac.off();
+  ac.send();
 }
