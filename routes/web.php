@@ -30,7 +30,5 @@ Route::middleware([
     })->name('dashboard');
     Route::resource('/ambientes', AmbientesController::class);
     Route::resource('/dispositivos', DispositivosController::class);
-    
+    route::view('criarambiente', 'criarambiente');
 });
-
-route::view('criarambiente', 'criarambiente');

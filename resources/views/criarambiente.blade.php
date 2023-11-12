@@ -14,8 +14,8 @@
             </nav>
         </aside>
 
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;" class="flex items-center justify-center h-screen w-96">
-            <form class="bg-white p-3 rounded-lg shadow-md relative w-96">
+        <div class="flex items-center justify-center flex-1">
+            <form class="bg-white p-3 rounded-lg shadow-md w-96 mx-auto">
                 <div class="flex justify-end mb-2">
                     <!-- Botão para fechar o pop-up no canto direito -->
                     <button class="text-sm text-gray-500 hover:text-gray-700 dark:text-red dark:hover:text-red-300 focus:outline-none" onclick="fecharPopUp()">
