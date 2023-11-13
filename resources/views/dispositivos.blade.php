@@ -15,6 +15,9 @@
         <main class="w-4/5 bg-white p-4 ml-4">
             <div class="flex items-center justify-center">
                 <form class="w-full max-w-md p-4 bg-gray-100 rounded-lg">
+                    <div class="mb-4 text-center">
+                        <h1>Cadastrar Dispositivo</h1>
+                    </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-name">
                             Nome do Dispositivo
