@@ -18,6 +18,10 @@ class AmbientesController extends Controller
         return response()->json(['ambientes' => $ambientes], 200);
     }
 
+    public function create(){
+        return view('criarambiente');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
