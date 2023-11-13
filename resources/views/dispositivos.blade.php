@@ -20,21 +20,15 @@
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-name">
-                            Nome do Ambiente
+                            Nome do Dispositivo
                         </label>
                         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-name" type="text" placeholder="Digite o nome do dispositivo">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-description">
-                            Descrição do Ambiente
+                            Descrição do Dispositivo
                         </label>
                         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-image">
-                            Foto do Ambiente
-                        </label>
-                        <input type="file" id="grid-device-image" name="device-image" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white">
                     </div>
                     <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="button">Cadastrar Dispositivo</button>
                 </form>
