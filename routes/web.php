@@ -33,6 +33,6 @@ Route::middleware([
     })->name('ambientes');  
     Route::get('/dispositivos', function () {
         return view('dispositivos');
-    })->name('dispositivos');
-    
+    })->name('dispositivos');    
 });
+

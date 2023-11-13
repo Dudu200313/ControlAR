@@ -9,7 +9,9 @@
                     <li><a href="" class="text-lg text-white font-bold">🖥 Lab 03</a></li>
                     <li><a href="" class="text-lg text-white font-bold">🖥 Lab 04</a></li>
                 </ul>
-                <button class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> + Adicionar</button>
+                <a href="/ambientes/create">
+                    <button class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> + Adicionar</button>
+                </a>
             </nav>
         </aside> 
         <main class="w-4/5 bg-white p-4 ml-4">
