@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('ambientes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
             $table->string('nome');
+            $table->string('descricao');
+            $table->string('imagem');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+        });
+
+        Schema::table('ambientes', function (Blueprint $table){
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

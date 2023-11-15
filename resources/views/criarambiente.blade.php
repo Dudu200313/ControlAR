@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="flex h-full">
         <aside class="w-1/5 min-h-screen bg-gray-300 p-2 rounded-md">
             <nav class="flex flex-col items-center mt-20">
@@ -15,7 +14,8 @@
         </aside>
 
         <div class="flex items-center justify-center flex-1">
-            <form class="bg-white p-3 rounded-lg shadow-md w-96 mx-auto">
+            <form class="bg-white p-3 rounded-lg shadow-md w-96 mx-auto" action="{{ route('ambientes.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="flex justify-end mb-2">
                     <!-- Botão para fechar o pop-up no canto direito -->
                     <button class="text-sm text-gray-500 hover:text-gray-700 dark:text-red dark:hover:text-red-300 focus:outline-none" onclick="fecharPopUp()">
@@ -28,21 +28,21 @@
                 <h1 class="text-center mb-6">Criar Ambiente</h1>
 
                 <div class="mb-3">
-                    <label for="large-input" class="block mb-2 text-sm font-medium text-white-900 dark:text-blade">Nome do ambiente</label>
-                    <input type="text" id="large-input" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="nome" class="block mb-2 text-sm font-medium text-white-900 dark:text-blade">Nome do ambiente</label>
+                    <input id="nome" name="nome" type="text" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
                 <div class="mb-3">
-                    <label for="base-input" class="block mb-2 text-sm font-medium text-white-900 dark:text-black">Descrição do ambiente</label>
-                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-white-700 dark:border-gray-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="descricao" class="block mb-2 text-sm font-medium text-white-900 dark:text-black">Descrição do ambiente</label>
+                    <input id="descricao" name="descricao" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-white-700 dark:border-gray-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
                 <div class="mb-3">
                     <!-- Área para upload de fotos -->
-                    <input type="file" id="file-upload" class="mb-2">
+                    <input id="imagem" name="imagem" type="file" class="mb-2">
 
                     <!-- Botão Criar -->
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue" type="button">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
                         Criar
                     </button>
                 </div>

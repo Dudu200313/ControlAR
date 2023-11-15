@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ambientes;
+use Illuminate\Http\Request;
 
 class AmbientesController extends Controller
 {
@@ -30,17 +30,24 @@ class AmbientesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nome' => 'required|string|max:255',
-            'admin_id' => 'required|exists:users,id'
-        ]);
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
+            $requestImage = $request->imagem;
+            
+            $extension = $requestImage->extension();
 
-        $ambiente = Ambientes::create([
-            'nome' => $request->input('nome'),
-            'admin_id' => $request->input('admin_id')
-        ]);
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now") . "." . $extension);
 
-        return response()->json(['ambiente' => $ambiente], 201);
+            $requestImage->move(public_path('img/ambientes'), $imageName);
+        }
+
+        Ambientes::create([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'imagem' => $imageName,
+            'user_id' => $request->user()->id
+        ]);
+        
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -71,7 +78,7 @@ class AmbientesController extends Controller
     {
         $this->validate($request, [
             'nome' => 'string|max:255',
-            'admin_id' => 'exists:users,id'
+            'user_id' => 'exists:users,id'
         ]);
 
         $ambiente = Ambientes::find($id);

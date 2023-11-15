@@ -16,10 +16,8 @@ class Dispositivos extends Model
         'temperatura',
     ];
 
-
     public function admin(){
-
-        return $this->hasMany(Ambientes::class, 'admin_id', 'id');
+        return $this->hasMany(Ambientes::class, 'user_id', 'id');
     }
 }
 

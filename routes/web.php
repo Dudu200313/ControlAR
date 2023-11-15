@@ -28,9 +28,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/ambientes', function () {
-        return view('ambientes');
-    })->name('ambientes');  
+    Route::resource('/ambientes', AmbientesController::class);
     Route::get('/dispositivos', function () {
         return view('dispositivos');
     })->name('dispositivos');    

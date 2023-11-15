@@ -11,12 +11,13 @@ class Ambientes extends Model
 
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'descricao',
+        'imagem',
+        'user_id',
     ];
 
-
     public function admin(){
-
-        return $this->hasMany(User::class, 'admin_id', 'id');
+        return $this->hasMany(User::class, 'user_id', 'id');
     }
 }
