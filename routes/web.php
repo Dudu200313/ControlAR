@@ -25,8 +25,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
+    Route::get('/dashboard/{ambiente_id?}', function ($ambiente_id = null) {
+        return view('dashboard', ['ambiente_id' => $ambiente_id]);
     })->name('dashboard');
     Route::resource('/ambientes', AmbientesController::class);
     Route::get('/dispositivos', function () {
