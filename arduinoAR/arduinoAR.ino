@@ -1,7 +1,8 @@
 
-#include <IRremoteESP8266.h>
-#include <IRsend.h>
-#include <ir_Carrier.h>
+//#include <IRremoteESP8266.h>
+//#include <IRsend.h>
+#include <MideaHeatpumpIR.h>
+//#include <ir_Carrier.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 //#include <Carrier.h>
@@ -9,13 +10,8 @@
 //#include <IRremote.h>
 // the IR emitter object
 #include "SoftwareSerial.h"
-//#define pin 12
 
-// the Carrier code generator object
-//Carrier carrier(MODE_auto,FAN_3,AIRFLOW_dir_1,25,STATE_on);
-//IRsend IRemissor (pin, false, true);
-const uint16_t pin = 12;
-IRCarrierAc64 ac(pin);
+
 // WiFi
 const char *ssid = "DTEL_NARUTO 2.4"; // Enter your WiFi name
 const char *password = "luibento";  // Enter WiFi password
@@ -27,12 +23,20 @@ const char *mqtt_username = "";
 const char *mqtt_password = "";
 const int mqtt_port = 1883;
 
+const byte heatpumpOff         = 0;
+const byte heatpumpNormal      = 1;
+const byte heatpumpMaintenance = 2;
+
 WiFiClient espClient;
 PubSubClient client(espClient);
+IRSenderESP8266 irSender(12);
+
+byte heatpumpState = heatpumpOff;
+
+HeatpumpIR *heatpumpIR = new MideaHeatpumpIR();
 
 void setup() {
-  //instanciar o objeto
-  ac.begin();
+
   // Set software serial baud to 115200;
   Serial.begin(9600);
   // connecting to a WiFi network
@@ -61,15 +65,7 @@ void setup() {
   client.publish(topic, "oie eae beleza");
   client.subscribe(topic);
 
-  delay(5000);
-
-  //isto serve pra configurar oque vamos enviar no ac.send, procurar funcoes
-  //no arquivo ir_Carrier.cpp
-  ac.setFan(kCarrierAc64FanLow);
-  ac.setMode(kCarrierAc64Cool);
-  ac.setTemp(22);
-  //ac.setSwing(true);
-    
+  delay(5000); 
 }
 
 void callback(char *topic, byte *payload, unsigned int length) {
@@ -84,14 +80,41 @@ void callback(char *topic, byte *payload, unsigned int length) {
 }
 
 void loop() {
+  //enviando mensagem para o topico MQTT 
   client.loop();
 
-  Serial.println("ligando o ar");
-  ac.on();
-  ac.send();
-  delay(15000);
+  //
 
-  Serial.println("desligando o ar");
-  ac.off();
-  ac.send();
+   Serial.println(F("Normal heating operation"));
+
+      Serial.println(F("* Sending power OFF"));
+      heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
+      delay(5000); // 15 seconds, to allow full shutdown
+
+      Serial.println(F("* Sending normal heat command"));
+      heatpumpIR->send(irSender, POWER_ON, MODE_COOL, FAN_2, 18, VDIR_UP, HDIR_AUTO);
+      heatpumpState = heatpumpNormal;
+
+      //aaa
+
+      Serial.println(F("Maintenance heating operation"));
+
+      Serial.println(F("* Sending power OFF"));
+      heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 25, VDIR_UP, HDIR_AUTO);
+      delay(5000); // 15 seconds, to allow full shutdown
+
+      Serial.println(F("* Sending normal heat command"));
+      heatpumpIR->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
+      delay(5000); // 15 seconds, to allow full start before switching to maintenance
+
+      Serial.println(F("* Switching to maintenance heating"));
+      heatpumpIR->send(irSender, POWER_ON, MODE_MAINT, FAN_3, 10, VDIR_UP, HDIR_AUTO);
+
+      heatpumpState = heatpumpMaintenance;
+
+    heatpumpState = heatpumpOff;
+    Serial.println(F("Sending power OFF"));
+    heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
+
+
 }
