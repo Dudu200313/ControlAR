@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dispositivos', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
+            $table->string('marca');
             $table->boolean('estado');
             $table->float('temperatura');
             $table->unsignedBigInteger('ambiente_id');

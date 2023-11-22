@@ -11,7 +11,7 @@ class Dispositivos extends Model
 
 
     protected $fillable = [
-        'tipo',
+        'marca',
         'estado',
         'temperatura',
     ];

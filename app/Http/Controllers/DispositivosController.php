@@ -27,13 +27,13 @@ class DispositivosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tipo' => 'required|string|max:255',
-            'estado' => 'required|boolean',
+            'marca' => 'required|string|max:255',
+            'estado' => 'boolean',
             'temperatura' => 'required|numeric'
         ]);
 
         $dispositivo = Dispositivos::create([
-            'tipo' => $request->input('tipo'),
+            'marca' => $request->input('marca'),
             'estado' => $request->input('estado'),
             'temperatura' => $request->input('temperatura')
         ]);
@@ -68,7 +68,7 @@ class DispositivosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'tipo' => 'string|max:255',
+            'marca' => 'string|max:255',
             'estado' => 'boolean',
             'temperatura' => 'numeric'
         ]);

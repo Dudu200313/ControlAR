@@ -22,6 +22,7 @@ const char *topic = "testemqtt";
 const char *mqtt_username = "";
 const char *mqtt_password = "";
 const int mqtt_port = 1883;
+const char topic[]  = "testemqtt";
 
 const byte heatpumpOff         = 0;
 const byte heatpumpNormal      = 1;
