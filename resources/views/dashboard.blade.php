@@ -34,8 +34,8 @@
                         </div>
                     @empty
                         <p class="mr-4">Nenhum dispositivo encontrado para este ambiente.</p>
-                        <a class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full" href="/dispositivos"><button>Cadastrar dispositivo</button></a>
                     @endforelse
+                    <a class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full" href="{{ route('dispositivos.create', ['ambiente_id' => $ambiente_id]) }}"><button>Cadastrar dispositivo</button></a>
                 </div>
             @else
                 <p>Selecione um ambiente na barra lateral.</p>

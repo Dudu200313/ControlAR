@@ -18,6 +18,10 @@ class DispositivosController extends Controller
         return response()->json(['dispositivos' => $dispositivos], 200);
     }
 
+    public function create($ambiente_id){
+        return view('criardispositivo', ['ambiente_id' => $ambiente_id]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -26,19 +30,14 @@ class DispositivosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'marca' => 'required|string|max:255',
-            'estado' => 'boolean',
-            'temperatura' => 'required|numeric'
+        Dispositivos::create([
+            'marca' => $request->marca,
+            'estado' => $request->estado,
+            'temperatura' => $request->temperatura,
+            'ambiente_id' => $request->ambiente_id
         ]);
-
-        $dispositivo = Dispositivos::create([
-            'marca' => $request->input('marca'),
-            'estado' => $request->input('estado'),
-            'temperatura' => $request->input('temperatura')
-        ]);
-
-        return response()->json(['dispositivo' => $dispositivo], 201);
+        
+        return redirect(route('dashboard', ['ambiente_id' => $request->ambiente_id]));
     }
 
     /**

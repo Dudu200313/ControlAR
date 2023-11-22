@@ -19,6 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('ambiente_id');
             $table->timestamps();
         });
+
+        Schema::table('dispositivos', function (Blueprint $table){
+            $table->foreign('ambiente_id')->references('id')->on('ambientes')->onDelete('cascade');
+        });
     }
 
     /**

@@ -9,7 +9,6 @@ class Ambientes extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'nome',
         'descricao',
@@ -18,6 +17,10 @@ class Ambientes extends Model
     ];
 
     public function admin(){
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function dispositivos(){
+        return $this->hasMany(Dispositivos::class, 'ambiente_id', 'id');
     }
 }

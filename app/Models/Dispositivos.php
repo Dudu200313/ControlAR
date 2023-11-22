@@ -9,16 +9,14 @@ class Dispositivos extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'marca',
         'estado',
         'temperatura',
+        'ambiente_id',
     ];
 
-    public function admin(){
-        return $this->hasMany(Ambientes::class, 'user_id', 'id');
+    public function ambiente(){
+        return $this->belongsTo(Ambientes::class, 'ambiente_id', 'id');
     }
 }
-
-

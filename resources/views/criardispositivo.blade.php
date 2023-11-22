@@ -14,23 +14,31 @@
         </aside> 
         <main class="w-4/5 bg-white p-4 ml-4">
             <div class="flex items-center justify-center">
-                <form class="w-full max-w-md p-4 bg-gray-100 rounded-lg">
+                <form class="w-full max-w-md p-4 bg-gray-100 rounded-lg" action="{{ route('dispositivos.store') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="ambiente_id" value="{{ $ambiente_id }}">
                     <div class="mb-4 text-center">
                         <h1>Cadastrar Dispositivo</h1>
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-name">
-                            Nome do Dispositivo
+                            Marca do dispositivo
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-name" type="text" placeholder="Digite o nome do dispositivo">
+                        <input id="marca" name="marca" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-name" type="text" placeholder="Digite o nome do dispositivo">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-description">
-                            Descrição do Dispositivo
+                            Estado atual do dispositivo
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
+                        <input id="estado" name="estado" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
                     </div>
-                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="button">Cadastrar Dispositivo</button>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-description">
+                            Temperatura atual do dispositivo
+                        </label>
+                        <input id="temperatura" name="temperatura" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
+                    </div>
+                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Cadastrar Dispositivo</button>
                 </form>
             </div>
         </main> 

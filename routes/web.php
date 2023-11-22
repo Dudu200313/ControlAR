@@ -29,8 +29,6 @@ Route::middleware([
         return view('dashboard', ['ambiente_id' => $ambiente_id]);
     })->name('dashboard');
     Route::resource('/ambientes', AmbientesController::class);
-    Route::get('/dispositivos', function () {
-        return view('dispositivos');
-    })->name('dispositivos');    
+    Route::resource('/dispositivos', DispositivosController::class)->except(['create']);
+    Route::get('/dispositivos/create/{ambiente_id}', [DispositivosController::class, 'create'])->name('dispositivos.create');
 });
-
