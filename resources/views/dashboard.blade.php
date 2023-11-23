@@ -30,6 +30,12 @@
                                 @elseif ($dispositivo->estado == 1)
                                     <span class="bg-green-500 text-white rounded-full px-2 ml-2">Ligado</span>
                                 @endif
+                                <form action="{{ route('dispositivos.publicar') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                        + Adicionar
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @empty

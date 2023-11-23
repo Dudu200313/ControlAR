@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default_connection' => 'default',
+    'default_connection' => 'private',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +115,10 @@ return [
 
             ],
 
+        ],
+        'private' => [
+            'host' => 'test.mosquitto.org',
+            'port' => 1883,
         ],
 
     ],

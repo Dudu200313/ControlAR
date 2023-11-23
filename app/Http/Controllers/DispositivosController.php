@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dispositivos;
+use PhpMqtt\Client\Facades\MQTT;
 
 class DispositivosController extends Controller
 {
@@ -100,5 +101,10 @@ class DispositivosController extends Controller
         $dispositivo->delete();
 
         return response()->json(['message' => 'Dispositivo excluído com sucesso'], 200);
+    }
+
+    // função para publicar mensagem no tópico 'test'
+    public function publicar(){        
+        MQTT::publish('test', 'Hello World!');
     }
 }
