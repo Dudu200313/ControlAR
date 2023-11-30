@@ -12,19 +12,19 @@
     <x-authentication-card>
         <x-slot name="logo">
         </x-slot>
-      
-        <div class="flex items-center"> 
-            <h1 class="text-3xl font-bold text-center">Login</h1>
-        </div>
-       
+
         <x-validation-errors class="mb-4" />
         @if (session('status'))
         <div class="mb-4 font-medium text-sm text-green-600">
             {{ session('status') }}
         </div>
         @endif
-        <form method="POST" action="{{ route('login') }}"  class="bg-slate-400 p-4 rounded ">
+        <form method="POST" action="{{ route('login') }}"  class="bg-slate-300 p-4 rounded ">
             @csrf
+
+            <div class="flex items-center"> 
+                 <h1 class="text-3xl font-bold text-center">Login</h1>
+           </div>
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
