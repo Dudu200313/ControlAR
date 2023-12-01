@@ -107,4 +107,7 @@ class DispositivosController extends Controller
     public function publicar(){        
         MQTT::publish('test', 'Hello World!');
     }
+    public function estado(){
+        MQTT::publish('test', 'ON');
+    }
 }

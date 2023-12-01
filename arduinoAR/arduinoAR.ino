@@ -1,28 +1,21 @@
-
-//#include <IRremoteESP8266.h>
-//#include <IRsend.h>
 #include <MideaHeatpumpIR.h>
-//#include <ir_Carrier.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-//#include <Carrier.h>
 
-//#include <IRremote.h>
-// the IR emitter object
 #include "SoftwareSerial.h"
 
 
 // WiFi
-const char *ssid = "DTEL_NARUTO 2.4"; // Enter your WiFi name
-const char *password = "luibento";  // Enter WiFi password
+const char *ssid = "XXX"; // Enter your WiFi name
+const char *password = "XXX";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "test.mosquitto.org";
-const char *topic = "testemqtt";
+const char *topic = "test";
 const char *mqtt_username = "";
 const char *mqtt_password = "";
 const int mqtt_port = 1883;
-const char topic[]  = "testemqtt";
+//const char topic[]  = "test";
 
 const byte heatpumpOff         = 0;
 const byte heatpumpNormal      = 1;
@@ -30,16 +23,30 @@ const byte heatpumpMaintenance = 2;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-IRSenderESP8266 irSender(12);
+
 
 byte heatpumpState = heatpumpOff;
+IRSenderESP8266 irSender(12);
+HeatpumpIR *heatpumpIR;
 
-HeatpumpIR *heatpumpIR = new MideaHeatpumpIR();
+String client_id = "ESP-" + String(ESP.getChipId(), HEX);
+String power_topic = "test/" + client_id + "/estado";
+String mode_topic = "test/" + client_id + "/modo/set";
+String fan_topic = "test/" + client_id + "/fan_speed/set";
+String temperature_topic = "test/" + client_id + "/temperatura/set";
+String swing_topic = "test/" + client_id + "/swing/set";
+
+int power;
+int acmode;
+int fan;
+int temp;
+int swing;
 
 void setup() {
 
   // Set software serial baud to 115200;
   Serial.begin(9600);
+
   // connecting to a WiFi network
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -47,75 +54,90 @@ void setup() {
       Serial.println("conectando ao wifi..");
   }
   Serial.println("conectado com a rede wifi");
-  //connecting to a mqtt broker
-  client.setServer(mqtt_broker, mqtt_port);
-  client.setCallback(callback);
+
   while (!client.connected()) {
       String client_id = "esp8266-client-";
       client_id += String(WiFi.macAddress());
       Serial.printf("o cliente bla blabla %s conecta no mqtt server publico\n", client_id.c_str());
-      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
+      if (client.connect(client_id.c_str())) {
           Serial.println("mqtt broker conectado");
+          
+        client.subscribe(power_topic.c_str());
+        client.subscribe(mode_topic.c_str());
+        client.subscribe(fan_topic.c_str());
+        client.subscribe(temperature_topic.c_str());
+        client.subscribe(swing_topic.c_str());
       } else {
           Serial.print("deu merda ");
           Serial.print(client.state());
-          delay(2000);
+          delay(500);
       }
   }
   // publish and subscribe
-  client.publish(topic, "oie eae beleza");
-  client.subscribe(topic);
+  //client.publish(topic, "oie eae beleza");
+  //client.subscribe(topic);
 
   delay(5000); 
 }
 
+void setup_IR(){
+
+  heatpumpIR = new MideaHeatpumpIR();
+
+    //connecting to a mqtt broker
+  client.setServer(mqtt_broker, mqtt_port);
+  client.setCallback(callback);
+
+ // Serial.println("Topicos:");
+ // Serial.println(power_topic);
+ // Serial.println(mode_topic);
+ // Serial.println(fan_topic);
+ // Serial.println(temperature_topic);
+// Serial.println(swing_topic);
+
+
+  power = POWER_OFF;
+  acmode = MODE_AUTO;
+  fan = FAN_AUTO;
+  temp = 25;
+  swing = VDIR_SWING;
+
+}
+
 void callback(char *topic, byte *payload, unsigned int length) {
-  Serial.print("mensagem chegou ao topico: ");
-  Serial.println(topic);
-  Serial.print("zapzap:");
-  for (int i = 0; i < length; i++) {
-      Serial.print((char) payload[i]);
+  String Payload = "";
+  for (int i = 0; i < length; i++) Payload += (char)payload[i];
+
+  if (String(topic) == power_topic) {
+    if (Payload == "ON") power = POWER_ON;
+    else if (Payload == "OFF") power = POWER_OFF;
   }
-  Serial.println();
-  Serial.println("-----------------------");
+  if (String(topic) == mode_topic) {
+    if (Payload == "heat") acmode = MODE_HEAT;
+    else if (Payload == "cool") acmode = MODE_COOL;
+    else if (Payload == "dry") acmode = MODE_DRY;
+    else if (Payload == "fan_only") acmode = MODE_FAN;
+    else if (Payload == "auto") acmode = MODE_AUTO;
+  }
+  if (String(topic) == fan_topic) {
+    if (Payload == "auto") fan = FAN_AUTO;
+    else if (Payload == "low") fan = FAN_1;
+    else if (Payload == "medium") fan = FAN_2;
+    else if (Payload == "high") fan = FAN_3;
+  }
+  if (String(topic) == temperature_topic) {
+    temp = Payload.toInt();
+  }
+  if (String(topic) == swing_topic) {
+    if (Payload == "on") swing = VDIR_AUTO;
+    else if (Payload == "off") swing = VDIR_SWING;
+  }
+
+  heatpumpIR->send(irSender, power, acmode, fan, temp, swing, 0);
 }
 
 void loop() {
   //enviando mensagem para o topico MQTT 
   client.loop();
-
-  //
-
-   Serial.println(F("Normal heating operation"));
-
-      Serial.println(F("* Sending power OFF"));
-      heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
-      delay(5000); // 15 seconds, to allow full shutdown
-
-      Serial.println(F("* Sending normal heat command"));
-      heatpumpIR->send(irSender, POWER_ON, MODE_COOL, FAN_2, 18, VDIR_UP, HDIR_AUTO);
-      heatpumpState = heatpumpNormal;
-
-      //aaa
-
-      Serial.println(F("Maintenance heating operation"));
-
-      Serial.println(F("* Sending power OFF"));
-      heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 25, VDIR_UP, HDIR_AUTO);
-      delay(5000); // 15 seconds, to allow full shutdown
-
-      Serial.println(F("* Sending normal heat command"));
-      heatpumpIR->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
-      delay(5000); // 15 seconds, to allow full start before switching to maintenance
-
-      Serial.println(F("* Switching to maintenance heating"));
-      heatpumpIR->send(irSender, POWER_ON, MODE_MAINT, FAN_3, 10, VDIR_UP, HDIR_AUTO);
-
-      heatpumpState = heatpumpMaintenance;
-
-    heatpumpState = heatpumpOff;
-    Serial.println(F("Sending power OFF"));
-    heatpumpIR->send(irSender, POWER_OFF, MODE_HEAT, FAN_2, 22, VDIR_UP, HDIR_AUTO);
-
-
+  delay(500);
 }

@@ -27,6 +27,10 @@
                         </h2>
                         @if ($dispositivo->estado == 0)
                         <span class="bg-red-500 text-white rounded-full py-2 px-4 ml-2">Desligado</span>
+                        <form action="{{ route('dispositivos.estado')}}" method="POST">
+                            @csrf
+                            <button type="submit"> ligar </button>
+                        </form>
                         @elseif ($dispositivo->estado == 1)
                         <span class="bg-green-500 text-white rounded-full py-2 px-4 ml-2">Ligado</span>
                         @endif

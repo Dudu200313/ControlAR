@@ -32,4 +32,5 @@ Route::middleware([
     Route::resource('/dispositivos', DispositivosController::class)->except(['create']);
     Route::get('/dispositivos/create/{ambiente_id}', [DispositivosController::class, 'create'])->name('dispositivos.create');
     Route::post('/dispositivos/publicar', [DispositivosController::class, 'publicar'])->name('dispositivos.publicar');
+    Route::post('/dispositivos/estado', [DispositivosController::class, 'publicar'])->name('dispositivos.estado');
 });
