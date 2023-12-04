@@ -5,8 +5,8 @@
 
 
 // WiFi
-const char *ssid = "XXX"; // Enter your WiFi name
-const char *password = "XXX";  // Enter WiFi password
+const char *ssid = "aaaaa"; // Enter your WiFi name
+const char *password = "123456789";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "test.mosquitto.org";
@@ -28,7 +28,7 @@ IRSenderESP8266 irSender(12);
 HeatpumpIR *heatpumpIR = new MideaHeatpumpIR();
 
 String esp_id = "ESP-" + String(ESP.getChipId(), HEX);
-String power_topic = "test/" + esp_id + "/estado";
+String power_topic = "test";
 String mode_topic = "test/" + esp_id + "/modo/set";
 String fan_topic = "test/" + esp_id + "/fan_speed/set";
 String temperature_topic = "test/" + esp_id + "/temperatura/set";
@@ -67,7 +67,7 @@ void setup() {
         if (client.connect(client_id.c_str())) {
             Serial.println("mqtt broker conectado");
             
-            client.publish(esp_id);
+            client.publish("test", "esp_id");
 
             client.subscribe(power_topic.c_str());
             client.subscribe(mode_topic.c_str());
