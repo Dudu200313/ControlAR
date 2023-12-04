@@ -39,7 +39,16 @@ class DispositivosController extends Controller
         ]);
         
         return redirect(route('dashboard', ['ambiente_id' => $request->ambiente_id]));
+
+        $mqtt = MQTT::connection();
+        $mqtt->subscribe('test', function (string $topic, string $message) {
+            echo sprintf('Received QoS level 1 message on topic [%s]: %s', $topic, $message);
+        }, 1);
+        $mqtt->loop(true);
+        $esp_id = $message;
+
     }
+
 
     /**
      * Display the specified resource.
@@ -108,6 +117,8 @@ class DispositivosController extends Controller
         MQTT::publish('test', 'Hello World!');
     }
     public function estado(){
-        MQTT::publish('test', 'ON');
+        MQTT::publish('test' . $esp_id . '/estado', 'on');
     }
+
+   
 }
