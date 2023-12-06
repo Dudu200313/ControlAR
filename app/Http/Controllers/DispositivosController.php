@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dispositivos;
+use App\Models\ESPs; 
 use PhpMqtt\Client\Facades\MQTT;
 
 class DispositivosController extends Controller
@@ -48,6 +49,11 @@ class DispositivosController extends Controller
         }, 1);
         $mqtt->loop(true);
         $esp_id = $msg;
+
+                ESPs::create([
+            'esp_id' => $esp_id->esp_id,
+            'dispositivo_id' => $request->dispositivo_id
+        ]);
 
     }
 

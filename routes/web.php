@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AmbientesController;
 use App\Http\Controllers\DispositivosController;
+use App\Http\Controllers\ESPsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +34,5 @@ Route::middleware([
     Route::resource('/dispositivos', DispositivosController::class)->except(['create']);
     Route::get('/dispositivos/create/{ambiente_id}', [DispositivosController::class, 'create'])->name('dispositivos.create');
     Route::post('/dispositivos/publicar', [DispositivosController::class, 'publicar'])->name('dispositivos.publicar');
-    Route::post('/dispositivos/estado', [DispositivosController::class, 'estado'])->name('dispositivos.estado');
+    Route::post('/esps/estado', [DispositivosController::class, 'estado'])->name('esps.estado');
 });
