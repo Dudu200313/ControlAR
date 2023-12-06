@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('esps', function (Blueprint $table) {
+        Schema::create('e_s_ps', function (Blueprint $table) {
             $table->id();
             $table->String('esp_id');
             $table->unsignedBigInteger('dispositivo_id');
             $table->timestamps();
         });
 
-        Schema::table('esps', function (Blueprint $table){
+        Schema::table('e_s_ps', function (Blueprint $table){
             $table->foreign('dispositivo_id')->references('id')->on('dispositivos')->onDelete('cascade');
         });
     }
