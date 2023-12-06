@@ -36,27 +36,12 @@ class DispositivosController extends Controller
             'marca' => $request->marca,
             'estado' => $request->estado,
             'temperatura' => $request->temperatura,
+            'esp_id' => $request->esp_id,
             'ambiente_id' => $request->ambiente_id
         ]);
         
         return redirect(route('dashboard', ['ambiente_id' => $request->ambiente_id]));
-
-        $msg = null;
-        $mqtt = MQTT::connection();
-        $mqtt->subscribe('test', function (string $topic, string $message) {
-            echo sprintf('Received QoS level 1 message on topic [%s]: %s', $topic, $message);
-            $msg = $message;
-        }, 1);
-        $mqtt->loop(true);
-        $esp_id = $msg;
-
-                ESPs::create([
-            'esp_id' => $esp_id->esp_id,
-            'dispositivo_id' => $request->dispositivo_id
-        ]);
-
     }
-
 
     /**
      * Display the specified resource.
@@ -127,6 +112,4 @@ class DispositivosController extends Controller
     public function estado(){
         MQTT::publish('test', 'on');
     }
-
-   
 }

@@ -13,6 +13,7 @@ class Dispositivos extends Model
         'marca',
         'estado',
         'temperatura',
+        'esp_id',
         'ambiente_id',
     ];
 

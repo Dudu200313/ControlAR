@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('marca');
             $table->boolean('estado');
             $table->float('temperatura');
+            $table->string('esp_id');
             $table->unsignedBigInteger('ambiente_id');
             $table->timestamps();
         });

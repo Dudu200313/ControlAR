@@ -38,6 +38,12 @@
                         </label>
                         <input id="temperatura" name="temperatura" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
                     </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-device-description">
+                            Número de identificação do aparelho
+                        </label>
+                        <input id="esp_id" name="esp_id" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-device-description" type="text" placeholder="Digite o número de identificação do aparelho">
+                    </div>
                     <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Cadastrar Dispositivo</button>
                 </form>
             </div>
