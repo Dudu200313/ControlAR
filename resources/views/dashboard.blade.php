@@ -27,23 +27,17 @@
                         </h2>
                         @if ($dispositivo->estado == 0)
                         <span class="bg-red-500 text-white rounded-full py-2 px-4 ml-2">Desligado</span>
-                        <form action="{{ route('dispositivos.estado')}}" method="POST">
+                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "on"]) }}" method="POST">
                             @csrf
                             <button type="submit" value="on"> ligar </button>
                         </form>
                         @elseif ($dispositivo->estado == 1)
                         <span class="bg-green-500 text-white rounded-full py-2 px-4 ml-2">Ligado</span>
-                        <form action="{{ route('dispositivos.estado')}}" method="POST">
+                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "off"])}}" method="POST">
                             @csrf
                             <button type="submit" value="off"> desligar </button>
                         </form>
                         @endif
-                        <form action="{{ route('dispositivos.publicar') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                + Adicionar
-                            </button>
-                        </form>
                     </div>
                 </div>
                 @empty

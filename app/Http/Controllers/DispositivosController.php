@@ -109,7 +109,9 @@ class DispositivosController extends Controller
     public function publicar(){        
         MQTT::publish('test', 'Hello World!');
     }
-    public function estado(){
-        MQTT::publish('test', 'on');
+    
+    public function estado($esp_id, $message){
+        MQTT::publish("test/" . $esp_id . "/power/set", $message);
+        return redirect(route('dashboard'));
     }
 }
