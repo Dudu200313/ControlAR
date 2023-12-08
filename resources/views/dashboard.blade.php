@@ -25,6 +25,11 @@
                         <h2 class="text-lg text-gray-600">
                             {{ $dispositivo->temperatura }}°C
                         </h2>
+                        <form action="{{ route('dispositivos.temperatura', ['esp_id'=>$dispositivo->esp_id, 'message' => ""])}}" method="POST">
+                            @csrf
+                            <input id = "temperatura" type="text">
+                            <button type="submit"> enviar temperatura </button>
+                        </form>
                         @if ($dispositivo->estado == 0)
                         <span class="bg-red-500 text-white rounded-full py-2 px-4 ml-2">Desligado</span>
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "on"]) }}" method="POST">

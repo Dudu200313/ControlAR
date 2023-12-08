@@ -114,4 +114,9 @@ class DispositivosController extends Controller
         MQTT::publish("test/" . $esp_id . "/power/set", $message);
         return redirect(route('dashboard'));
     }
+
+    public function temperatura($esp_id, $message){
+        MQTT::publish("test/" . $esp_id . "/temperatura/set", $message);
+        return redirect(route('dashboard'));
+    }
 }

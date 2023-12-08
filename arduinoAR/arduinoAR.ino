@@ -28,7 +28,7 @@ IRSenderESP8266 irSender(12);
 HeatpumpIR *heatpumpIR = new MideaHeatpumpIR();
 
 String esp_id = "ESP-" + String(ESP.getChipId(), HEX);
-String power_topic = "test/" + esp_id + "power/set";
+String power_topic = "test/" + esp_id + "/power/set";
 String mode_topic = "test/" + esp_id + "/modo/set";
 String fan_topic = "test/" + esp_id + "/fan_speed/set";
 String temperature_topic = "test/" + esp_id + "/temperatura/set";
@@ -38,7 +38,7 @@ String swing_topic = "test/" + esp_id + "/swing/set";
 int power = POWER_OFF;
 int acmode = MODE_AUTO;
 int fan = FAN_AUTO;
-int temp = 25;
+int temp;
 int swing = VDIR_SWING;
 
 void setup() {
