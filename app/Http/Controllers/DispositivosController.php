@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dispositivos;
-use App\Models\ESPs; 
 use PhpMqtt\Client\Facades\MQTT;
 
 class DispositivosController extends Controller
@@ -118,33 +117,29 @@ class DispositivosController extends Controller
             'estado' => $message
         ]);*/
 
-
         return redirect(route('dashboard'));
     }
 
-
-    public function temperatura(Dispositivos $dispositivo, $esp_id, $message, $id) {
+    public function temperatura(Request $request, $id, $esp_id) {
         // Publish MQTT message
-        MQTT::publish("test/" . $esp_id . "/temperatura/set", $message);
-    
-        // Convert $message to integer
-        $msg = intval($message);
+        MQTT::publish("test/" . $esp_id . "/temperatura/set", $request->temperatura);
+
+        $this->validate($request, [
+            'temperatura' => 'numeric'
+        ]);
     
         // Find the dispositivo by ID
         $dispositivo = Dispositivos::find($id);
     
         // Check if dispositivo exists
         if (!$dispositivo) {
-            return response()->json(['mensagem' => 'Dispositivo não encontrado', $msg, $id], 404);
+            return response()->json(['message' => 'Dispositivo não encontrado'], 404);
         }
     
         // Update the temperatura
-        $dispositivo->update([
-            'temperatura' => $msg
-        ]);
+        $dispositivo->update($request->all());
     
         // Redirect to dashboard
         return redirect(route('dashboard'));
     }
-    
 }

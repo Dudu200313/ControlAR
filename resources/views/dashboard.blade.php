@@ -20,16 +20,16 @@
             <div class="flex">
                 @forelse (\App\Models\Dispositivos::where('ambiente_id', $ambiente_id)->get() as $dispositivo)
                 <div class="w-1/2 bg-gray-100 p-4 border border-gray-300 m-4">
-                    <h1 class="text-xl text-gray-700 mb-2">ar 1</h1>
+                    <h1 class="text-xl text-gray-700 mb-2">{{ $dispositivo->marca }}</h1>
                     <div class="flex items-center">
                         <h2 class="text-lg text-gray-600">
                             {{ $dispositivo->temperatura }}°C
                         </h2>
-                        <form action="{{ route('dispositivos.temperatura', ['id' => $dispositivo->id,'esp_id'=>$dispositivo->esp_id, 'message' => "temperatura"])}}" method="POST">
-                            @csrf
+                        <form action="{{ route('dispositivos.temperatura', ['id' => $dispositivo->id,'esp_id'=>$dispositivo->esp_id])}}" method="POST">
                             @method('PUT')
-                            <input type="text">
-                            <button type="submit"> enviar temperatura </button>
+                            @csrf
+                            <input id="temperatura" name="temperatura" type="number">
+                            <button> enviar temperatura </button>
                         </form>
                         @if ($dispositivo->estado == 0)
                         <span class="bg-red-500 text-white rounded-full py-2 px-4 ml-2">Desligado</span>
