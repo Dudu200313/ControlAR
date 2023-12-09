@@ -35,5 +35,5 @@ Route::middleware([
     Route::get('/dispositivos/create/{ambiente_id}', [DispositivosController::class, 'create'])->name('dispositivos.create');
     Route::post('/dispositivos/publicar', [DispositivosController::class, 'publicar'])->name('dispositivos.publicar');
     Route::post('/dispositivos/estado/{esp_id}/{message}', [DispositivosController::class, 'estado'])->name('dispositivos.estado');
-    Route::post('/dispositivos/temperatura/{esp_id}/{message}', [DispositivosController::class, 'temperatura'])->name('dispositivos.temperatura');
+    Route::put('/dispositivos/temperatura/{id}/{esp_id}/{message}', [DispositivosController::class, 'temperatura'])->name('dispositivos.temperatura');
 });

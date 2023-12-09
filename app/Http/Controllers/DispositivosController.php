@@ -112,11 +112,39 @@ class DispositivosController extends Controller
     
     public function estado($esp_id, $message){
         MQTT::publish("test/" . $esp_id . "/power/set", $message);
+
+        /*$dispositivo = Dispositivos::find($esp_id);
+        $dispositivo->update([
+            'estado' => $message
+        ]);*/
+
+
         return redirect(route('dashboard'));
     }
 
-    public function temperatura($esp_id, $message){
+
+    public function temperatura(Dispositivos $dispositivo, $esp_id, $message, $id) {
+        // Publish MQTT message
         MQTT::publish("test/" . $esp_id . "/temperatura/set", $message);
+    
+        // Convert $message to integer
+        $msg = intval($message);
+    
+        // Find the dispositivo by ID
+        $dispositivo = Dispositivos::find($id);
+    
+        // Check if dispositivo exists
+        if (!$dispositivo) {
+            return response()->json(['mensagem' => 'Dispositivo não encontrado', $msg, $id], 404);
+        }
+    
+        // Update the temperatura
+        $dispositivo->update([
+            'temperatura' => $msg
+        ]);
+    
+        // Redirect to dashboard
         return redirect(route('dashboard'));
     }
+    
 }
