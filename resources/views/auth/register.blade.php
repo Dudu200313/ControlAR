@@ -1,5 +1,5 @@
 <nav class="bg-blue-200 p-4 flex justify-between items-center">
-    <a href="{{ route('dashboard') }}" class="text-black text-4xl font-extrabold tracking-wider flex items-center"> 
+    <a href="{{ route('dashboard') }}" class="text-black text-4xl font-extrabold tracking-wider flex items-center">
         <img src="https://i.ibb.co/VpcFg4T/image.png" class="mr-2 w-8" alt="Logo">
         <span>Control<span class="text-black-600">AR</span></span>
     </a>
@@ -16,10 +16,10 @@
         <x-validation-errors class="mb-4" />
 
 
-        <form method="POST" action="{{ route('register') }}" class="bg-slate-300 p-4 rounded ">
+        <form method="POST" action="{{ route('register') }}" class="p-4 rounded ">
             @csrf
             <div class="flex items-start ">
-                <h1 class="text-2xl font-bold text-center">Cadastrar-se</h1>
+                <h1 class="text-4xl pb-3 font-bold text-center text-blue-500">Cadastrar-se</h1>
             </div>
 
             <div>

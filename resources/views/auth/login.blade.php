@@ -1,5 +1,5 @@
 <nav class="bg-blue-200 p-4 flex justify-between items-center">
-    <a href="{{ route('dashboard') }}" class="text-black text-4xl font-extrabold tracking-wider flex items-center"> 
+    <a href="{{ route('dashboard') }}" class="text-black text-4xl font-extrabold tracking-wider flex items-center">
         <img src="https://i.ibb.co/VpcFg4T/image.png" class="mr-2 w-8" alt="Logo">
         <span>Control<span class="text-black-600">AR</span></span>
     </a>
@@ -19,12 +19,12 @@
             {{ session('status') }}
         </div>
         @endif
-        <form method="POST" action="{{ route('login') }}"  class="bg-slate-300 p-4 rounded ">
+        <form method="POST" action="{{ route('login') }}" class=" p-4 rounded ">
             @csrf
 
-            <div class="flex items-center"> 
-                 <h1 class="text-3xl font-bold text-center">Login</h1>
-           </div>
+            <div class="flex items-center">
+                <h1 class="text-4xl pb-3 font-bold text-center text-blue-500">Login</h1>
+            </div>
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
