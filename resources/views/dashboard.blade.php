@@ -11,7 +11,7 @@
                     @endforeach
                 </ul>
                 <a href="/ambientes/create">
-                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-10 py-4 m-2 mt-4 rounded-full shadow-2xl text-2xl">+ Adicionar</button>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-3 my-7 rounded-full shadow-2xl text-2xl">+ Adicionar</button>
                 </a>
             </nav>
         </aside>
@@ -47,12 +47,14 @@
                     </div>
                 </div>
                 @empty
-                <p class="mr-4">Nenhum dispositivo encontrado para este ambiente.</p>
+                <div class="flex items-center justify-center h-screen">
+                    <p class="text-4xl font-bold"><span class="text-blue-500">Nenhum</span> dispositivo cadastrado no ambiente.</p>
+                </div>
                 @endforelse
             </div>
 
-            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-4">
-                <a class="mt-2 mb-2 bg-blue-500 hover-bg-blue-700 text-white font-bold px-10 py-4 m-10 rounded-full" href="{{ route('dispositivos.create', ['ambiente_id' => $ambiente_id]) }}"><button>+ Adicionar Ar</button></a>
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-10 ">
+                <a class="bg-blue-500 hover-bg-blue-700 text-white text-2xl font-bold px-10 py-4 m-10 rounded-full shadow-2xg" href="{{ route('dispositivos.create', ['ambiente_id' => $ambiente_id]) }}"><button>+ Adicionar Ar</button></a>
             </div>
 
             @else

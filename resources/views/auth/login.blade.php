@@ -3,7 +3,7 @@
         <img src="https://i.ibb.co/VpcFg4T/image.png" class="mr-2 w-8" alt="Logo">
         <span>Control<span class="text-black-600">AR</span></span>
     </a>
-    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded rounded-lg w-48 h-10">
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-48 h-10">
         Saiba-mais
     </button>
 </nav>
