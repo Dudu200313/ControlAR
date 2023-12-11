@@ -27,7 +27,7 @@ byte heatpumpState = heatpumpOff;
 IRSenderESP8266 irSender(12);
 HeatpumpIR *heatpumpIR = new MideaHeatpumpIR();
 
-String esp_id = "ESP-" + String(ESP.getChipId(), HEX);
+String esp_id = String(ESP.getChipId(), HEX);
 String power_topic = "test/" + esp_id + "/power/set";
 String mode_topic = "test/" + esp_id + "/modo/set";
 String fan_topic = "test/" + esp_id + "/fan_speed/set";
@@ -44,7 +44,7 @@ int swing = VDIR_SWING;
 void setup() {
 
   // Set software serial baud to 115200;
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   client.setServer(mqtt_broker, mqtt_port);
   client.setCallback(callback);
@@ -57,12 +57,14 @@ void setup() {
   }
   Serial.println("conectado com a rede wifi");
 
+  Serial.println(power_topic);
+
   while (!client.connected()) {
       String client_id = "esp8266-client-";
       client_id += String(WiFi.macAddress());
 
      
-      Serial.printf("o cliente bla blabla %s conecta no mqtt server publico\n", client_id.c_str());
+      Serial.printf("o cliente bla blabla %s conecta no mqtt server publico\n", esp_id.c_str());
      
         if (client.connect(client_id.c_str())) {
             Serial.println("mqtt broker conectado");
@@ -116,7 +118,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
     else if (Payload == "off") swing = VDIR_SWING;
   }
   
-
+  Serial.println("teste");
   heatpumpIR->send(irSender, power, acmode, fan, temp, swing, 0);
 
 }
