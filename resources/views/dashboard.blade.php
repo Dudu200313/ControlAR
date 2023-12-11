@@ -19,29 +19,32 @@
             @if(isset($ambiente_id))
             <div class="flex">
                 @forelse (\App\Models\Dispositivos::where('ambiente_id', $ambiente_id)->get() as $dispositivo)
-                <div class="w-1/2 bg-gray-100 p-4 border border-gray-300 m-4">
-                    <h1 class="text-xl text-gray-700 mb-2">{{ $dispositivo->marca }}</h1>
+                <div class="w-1/8 bg-gray-100 rounded-lg p-4 m-4">
+                    <h1 class="text-3xl font-bold text-gray-700">{{ $dispositivo->marca }}</h1>
+                    <div class="flex items-center justify-center m-0 p-0">
+                        <img class="w-72" src="https://cdn-icons-png.flaticon.com/512/1530/1530481.png" alt="um emoji de ar">
+                    </div>
                     <div class="flex items-center">
-                        <h2 class="text-lg text-gray-600">
-                            {{ $dispositivo->temperatura }}°C
+                        <h2 class="text-2xl font-bold text-gray-600">
+                            🌡️ {{ $dispositivo->temperatura }}°C
                         </h2>
                         <form action="{{ route('dispositivos.temperatura', ['id' => $dispositivo->id,'esp_id'=>$dispositivo->esp_id])}}" method="POST">
                             @method('PUT')
                             @csrf
-                            <input id="temperatura" name="temperatura" type="number">
-                            <button> enviar temperatura </button>
+                            <input class="m-2 w-24 border-gray-200" id="temperatura" name="temperatura" type="number">
+                            <button class="bg-slate-500 text-white rounded-full py-2 px-4 ml-2"> Enviar temperatura </button>
                         </form>
                         @if ($dispositivo->estado == 0)
-                        <span class="bg-red-500 text-white rounded-full py-2 px-4 ml-2">Desligado</span>
+                        <span class="bg-red-500 text-white py-2 px-4 ml-2">OFF</span>
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "on"]) }}" method="POST">
                             @csrf
-                            <button type="submit" value="on"> ligar </button>
+                            <button class="bg-green-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="on"> Ligar </button>
                         </form>
                         @elseif ($dispositivo->estado == 1)
-                        <span class="bg-green-500 text-white rounded-full py-2 px-4 ml-2">Ligado</span>
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "off"])}}" method="POST">
                             @csrf
-                            <button type="submit" value="off"> desligar </button>
+                            <span class="bg-green-500 text-white py-2 px-4 ml-2">ON</span>
+                            <button class="bg-red-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="off"> Desligar </button>
                         </form>
                         @endif
                     </div>
