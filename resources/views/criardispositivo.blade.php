@@ -3,13 +3,16 @@
         <aside class="w-1/5 min-h-screen bg-slate-200 m-8 rounded-md">
             <nav class="flex flex-col items-center">
                 <h1 class="bg-slate-300 text-5xl p-4 rounded-md flex px-8">Ambientes</h1>
-                <ul class="w-full mt-4 flex items-center justify-center flex-col gap-2 text-slate-500 font-bold text-3xl">
-                    <li><a href="pb-4">🖥 Lab 01</a></li>
-                    <li><a href="pb-4">🖥 Lab 02</a></li>
-                    <li><a href="pb-4">🖥 Lab 03</a></li>
-                    <li><a href="pb-4">🖥 Lab 04</a></li>
+                <ul class="w-full mt-4 flex items-center justify-center flex-col gap-2">
+                    @foreach (\App\Models\Ambientes::all() as $ambiente)
+                    <li>
+                        <a href="{{ route('dashboard', ['ambiente_id' => $ambiente->id]) }}" class="text-slate-600 font-bold text-4xl">🖥 {{ $ambiente->nome }}</a>
+                    </li>
+                    @endforeach
                 </ul>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-10 py-4 m-2 mt-4 rounded-full shadow-2xl text-2xl">+ Adicionar</button>
+                <a href="/ambientes/create">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-3 my-7 rounded-full shadow-2xl text-2xl">+ Adicionar</button>
+                </a>
             </nav>
         </aside>
         <main class="w-4/5 bg-white p-4 ml-4">
