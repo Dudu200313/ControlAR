@@ -18,31 +18,31 @@
                     @csrf
                     <input type="hidden" name="ambiente_id" value="{{ $ambiente_id }}">
                     <div class="flex items-center justify-center">
-                        <h1 class="text-3xl pb-3 font-bold text-center text-blue-500">Criar Ambiente</h1>
+                        <h1 class="text-3xl pb-3 font-bold text-center text-blue-500">Cadastrar Dispositivo</h1>
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-name">
                             Marca do dispositivo
                         </label>
-                        <input id="marca" name="marca" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-name" type="text" placeholder="Digite o nome do dispositivo">
+                        <input id="marca" name="marca" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-name" type="text" placeholder="Digite a marca do dispositivo">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-description">
                             Estado atual do dispositivo
                         </label>
-                        <input id="estado" name="estado" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
+                        <input id="estado" name="estado" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Ligado ou Desligado (0 ou 1)">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-description">
                             Temperatura atual do dispositivo
                         </label>
-                        <input id="temperatura" name="temperatura" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Digite a descrição do dispositivo">
+                        <input id="temperatura" name="temperatura" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Temperatura atual">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-description">
                             Número de identificação do aparelho
                         </label>
-                        <input id="esp_id" name="esp_id" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Digite o número de identificação do aparelho">
+                        <input id="esp_id" name="esp_id" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="ID do Arduino.">
                     </div>
                     <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Cadastrar Dispositivo</button>
                 </form>
