@@ -36,12 +36,12 @@
                         </form>
                         @if ($dispositivo->estado == 0)
                         <span class="bg-red-500 text-white py-2 px-4 ml-2">OFF</span>
-                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "on"]) }}" method="POST">
+                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "ON"]) }}" method="POST">
                             @csrf
                             <button class="bg-green-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="on"> Ligar </button>
                         </form>
                         @elseif ($dispositivo->estado == 1)
-                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "off"])}}" method="POST">
+                        <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "OFF"])}}" method="POST">
                             @csrf
                             <span class="bg-green-500 text-white py-2 px-4 ml-2">ON</span>
                             <button class="bg-red-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="off"> Desligar </button>

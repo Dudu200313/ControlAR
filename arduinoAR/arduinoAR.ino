@@ -3,7 +3,6 @@
 #include <PubSubClient.h>
 #include "SoftwareSerial.h"
 
-
 // WiFi
 const char *ssid = "aaaaa"; // Enter your WiFi name
 const char *password = "123456789";  // Enter WiFi password
@@ -34,7 +33,6 @@ String fan_topic = "test/" + esp_id + "/fan_speed/set";
 String temperature_topic = "test/" + esp_id + "/temperatura/set";
 String swing_topic = "test/" + esp_id + "/swing/set";
 
-
 int power = POWER_OFF;
 int acmode = MODE_AUTO;
 int fan = FAN_AUTO;
@@ -63,7 +61,6 @@ void setup() {
       String client_id = "esp8266-client-";
       client_id += String(WiFi.macAddress());
 
-     
       Serial.printf("o cliente bla blabla %s conecta no mqtt server publico\n", esp_id.c_str());
      
         if (client.connect(client_id.c_str())) {
@@ -82,9 +79,6 @@ void setup() {
           delay(500);
       }
   }
-  // publish and subscribe
-  //client.publish(topic, "oie eae beleza");
-  //client.subscribe(topic);
 
   delay(5000); 
 }
@@ -94,8 +88,12 @@ void callback(char *topic, byte *payload, unsigned int length) {
   for (int i = 0; i < length; i++) Payload += (char)payload[i] ;
   Serial.println(Payload);
   if (String(topic) == power_topic) {
-    if (Payload == "ON") power = POWER_ON;
-    else if (Payload == "OFF") power = POWER_OFF;
+    if (Payload == "ON") {
+      power = POWER_ON;
+    }
+    else if (Payload == "OFF") {
+      power = POWER_OFF;
+    }
   }
   if (String(topic) == mode_topic) {
     if (Payload == "heat") acmode = MODE_HEAT;
@@ -118,9 +116,8 @@ void callback(char *topic, byte *payload, unsigned int length) {
     else if (Payload == "off") swing = VDIR_SWING;
   }
   
-  Serial.println("teste");
+  Serial.println("power: " + String(power) + " - acmode: " + String(acmode) + " - fan: " + String(fan) + " - temp: " + String(temp) + " - swing: " + String(swing));
   heatpumpIR->send(irSender, power, acmode, fan, temp, swing, 0);
-
 }
 
 void loop() {
