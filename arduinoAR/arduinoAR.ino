@@ -35,11 +35,11 @@ String temperature_topic = "test/" + esp_id + "/temperatura/set";
 String swing_topic = "test/" + esp_id + "/swing/set";
 
 
-int power = POWER_OFF;
-int acmode = MODE_AUTO;
-int fan = FAN_AUTO;
+int power;
+int acmode;
+int fan;
 int temp;
-int swing = VDIR_SWING;
+int swing;
 
 void setup() {
 
