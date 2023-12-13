@@ -33,7 +33,7 @@
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-description">
                             Estado atual do dispositivo
                         </label>
-                        <input id="estado" name="estado" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Ligado ou Desligado (0 ou 1)">
+                        <input id="estado" name="estado" class="block w-full p-2 text-white-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" id="grid-device-description" type="text" placeholder="Desligado ou Ligado (0 ou 1)">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold" for="grid-device-description">
