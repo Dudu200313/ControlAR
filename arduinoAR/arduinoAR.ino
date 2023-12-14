@@ -4,8 +4,8 @@
 #include "SoftwareSerial.h"
 
 // WiFi
-const char *ssid = "aaaaa"; // Enter your WiFi name
-const char *password = "123456789";  // Enter WiFi password
+const char *ssid = "Luffy"; // Enter your WiFi name
+const char *password = "12345678";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "test.mosquitto.org";
@@ -32,7 +32,6 @@ String mode_topic = "test/" + esp_id + "/modo/set";
 String fan_topic = "test/" + esp_id + "/fan_speed/set";
 String temperature_topic = "test/" + esp_id + "/temperatura/set";
 String swing_topic = "test/" + esp_id + "/swing/set";
-
 
 int power;
 int acmode;
