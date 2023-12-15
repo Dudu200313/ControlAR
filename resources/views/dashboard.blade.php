@@ -15,8 +15,13 @@
                 </a>
             </nav>
         </aside>
-        <main class="w-4/5 bg-white p-4 mt-24">
+        <main class="w-4/5 bg-white p-4 mt-8">
             @if(isset($ambiente_id))
+            @foreach (\App\Models\Ambientes::all() as $ambiente)
+                @if ($ambiente->id == $ambiente_id)
+                    <h1 class="text-5xl flex">{{ $ambiente->nome }}</h1>
+                @endif
+            @endforeach
             <div class="flex">
                 @forelse (\App\Models\Dispositivos::where('ambiente_id', $ambiente_id)->get() as $dispositivo)
                 <div class="w-1/8 bg-gray-100 rounded-lg p-4 m-4">

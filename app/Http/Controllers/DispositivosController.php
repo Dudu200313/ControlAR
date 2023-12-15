@@ -103,21 +103,17 @@ class DispositivosController extends Controller
 
         return response()->json(['message' => 'Dispositivo excluído com sucesso'], 200);
     }
-
-    // função para publicar mensagem no tópico 'test'
-    public function publicar(){        
-        MQTT::publish('test', 'Hello World!');
-    }
     
     public function estado($esp_id, $message){
         MQTT::publish("test/" . $esp_id . "/power/set", $message);
 
-        /*$dispositivo = Dispositivos::find($esp_id);
-        $dispositivo->update([
-            'estado' => $message
-        ]);*/
+        $dispositivo = Dispositivos::where('esp_id', $esp_id)->first();
 
-        return redirect(route('dashboard'));
+        if (!$dispositivo) {
+            return response()->json(['message' => 'Dispositivo não encontrado'], 404);
+        }
+
+        return redirect(route('dashboard', ['ambiente_id' => $dispositivo->ambiente_id]));
     }
 
     public function temperatura(Request $request, $id, $esp_id) {
@@ -128,18 +124,14 @@ class DispositivosController extends Controller
             'temperatura' => 'numeric'
         ]);
     
-        // Find the dispositivo by ID
         $dispositivo = Dispositivos::find($id);
     
-        // Check if dispositivo exists
         if (!$dispositivo) {
             return response()->json(['message' => 'Dispositivo não encontrado'], 404);
         }
     
-        // Update the temperatura
         $dispositivo->update($request->all());
     
-        // Redirect to dashboard
-        return redirect(route('dashboard'));
+        return redirect(route('dashboard', ['ambiente_id' => $dispositivo->ambiente_id]));
     }
 }
