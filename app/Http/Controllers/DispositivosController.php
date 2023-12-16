@@ -101,7 +101,8 @@ class DispositivosController extends Controller
 
         $dispositivo->delete();
 
-        return response()->json(['message' => 'Dispositivo excluído com sucesso'], 200);
+        //return response()->json(['message' => 'Dispositivo excluído com sucesso'], 200);
+        return redirect(route('dashboard'));
     }
     
     public function estado($esp_id, $message){

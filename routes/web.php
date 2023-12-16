@@ -33,6 +33,7 @@ Route::middleware([
     Route::resource('/ambientes', AmbientesController::class);
     Route::resource('/dispositivos', DispositivosController::class)->except(['create']);
     Route::get('/dispositivos/create/{ambiente_id}', [DispositivosController::class, 'create'])->name('dispositivos.create');
+    Route::delete('/dispositivos/{dispositivo}', [DispositivosController::class, 'destroy'])->name('dispositivos.destroy');
     Route::post('/dispositivos/estado/{esp_id}/{message}', [DispositivosController::class, 'estado'])->name('dispositivos.estado');
     Route::put('/dispositivos/temperatura/{id}/{esp_id}', [DispositivosController::class, 'temperatura'])->name('dispositivos.temperatura');
 });
