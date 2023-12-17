@@ -48,9 +48,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 cursor-pointer hover:text-red-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 cursor-pointer hover:text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
                                 </button>
                             </form>
 
@@ -65,27 +65,28 @@
                             @method('PUT')
                             @csrf
                             <input class="m-2 w-24 border-gray-200" id="temperatura" name="temperatura" type="number">
-                            <button class="bg-slate-500 text-white rounded-full py-2 px-4 ml-2"> Enviar temperatura </button>
+                            <button class="bg-slate-500 text-white rounded-full py-2 px-4 ml-4"> Enviar temperatura </button>
                         </form>
 
                         @if ($dispositivo->estado == 0)
-                        <div class="text-center"> <!--- Switch de OFF --->
-                            <p class="text-gray-600 font-bold text-lg">Status</p>
-                            <button class="relative w-24 h-12 bg-gray-300 rounded-full p-3 transition-transform duration-300 ease-in-out transform">
-                                <span class="absolute left-3 bottom-1 bg-red-100 w-20 h-10 rounded-full"></span>
-                                <span class="absolute left-1 bottom-1 text-center text-white bg-red-500 w-10 h-10 rounded-full">OFF</span>
+                        <div class="text-center relative h-48 w-48 m-1" style="margin-left: -158px;"> <!--- Switch de OFF --->
+                            <p class="text-gray-600 font-bold text-lg"></p>
+                            <button class="absolute inset-0 rounded-full pb- transition-transform duration-300 ease-in-out transform mx-auto bg-gray-300 w-24 h-12 " style="top: 70%; transform: translateY(50%);margin-left: -15px ">
+                                <span class="absolute left-3 bottom-1 bg-red-100 w-20 h-10 rounded-full" ></span>
+                                <span class="absolute left-1 bottom-1 text-center text-white w-12 h-10 rounded-full bg-red-500">OFF</span>
                             </button>
                         </div>
+
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "ON"]) }}" method="POST">
                             @csrf
-                            <button class="bg-green-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="on"> Ligar </button>
+                            <button class="bg-green-500 text-white rounded-full py-2 px-8 ml-0 " type="submit" value="on"> Ligar </button>
                         </form>
                         @elseif ($dispositivo->estado == 1)
-                        <div class="text-center"> <!--- Switch de ON --->
-                            <p class="text-gray-600 font-bold text-lg">Status</p>
-                            <button class="relative w-24 h-12 bg-gray-300 rounded-full p-3 transition-transform duration-300 ease-in-out transform">
+                        <div class="text-center relative h-48 w-48 m-1" style="margin-left: -158px;";> <!--- Switch de ON --->
+                            <p class="text-gray-600 font-bold text-lg"></p>
+                            <button class="relative w-24 h-12 bg-gray-300 rounded-full p-3 transition-transform duration-300 ease-in-out transform" style="top: 70%; transform: translateY(50%);margin-left: -15px">
                                 <span class="absolute left-3 bottom-1 bg-green-100 w-20 h-10 rounded-full"></span>
-                                <span class="absolute left-1 bottom-1 text-center text-white bg-green-500 w-10 h-10 rounded-full">ON</span>
+                                <span class="absolute left-1 bottom-1 text-center text-white bg-green-500 w-12 h-10 rounded-full">ON</span>
                             </button>
                         </div>
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "OFF"])}}" method="POST">
