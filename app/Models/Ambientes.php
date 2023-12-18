@@ -12,7 +12,6 @@ class Ambientes extends Model
     protected $fillable = [
         'nome',
         'descricao',
-        'imagem',
         'user_id',
     ];
 

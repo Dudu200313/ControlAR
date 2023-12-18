@@ -30,20 +30,10 @@ class AmbientesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
-            $requestImage = $request->imagem;
-            
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now") . "." . $extension);
-
-            $requestImage->move(public_path('img/ambientes'), $imageName);
-        }
 
         Ambientes::create([
             'nome' => $request->nome,
             'descricao' => $request->descricao,
-            'imagem' => $imageName,
             'user_id' => $request->user()->id
         ]);
         

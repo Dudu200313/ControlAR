@@ -44,9 +44,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <!-- Área para upload de fotos -->
-                    <input id="imagem" name="imagem" type="file" class="mb-2">
-
                     <!-- Botão Criar -->
                     <div class="flex items-center justify-center">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline-blue">
