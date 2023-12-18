@@ -57,41 +57,41 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center">
-                        <h2 class="text-2xl font-bold text-gray-600">
+                    <div class="flex items-center justify-center" style="margin-top: -56px;" >
+                        <h2 class="text-2xl font-bold text-gray-600 ml-16">
                             🌡️ {{ $dispositivo->temperatura }}°C
                         </h2>
                         <form action="{{ route('dispositivos.temperatura', ['id' => $dispositivo->id,'esp_id'=>$dispositivo->esp_id])}}" method="POST">
                             @method('PUT')
                             @csrf
                             <input class="m-2 w-24 border-gray-200" id="temperatura" name="temperatura" type="number">
-                            <button class="bg-slate-500 text-white rounded-full py-2 px-4 ml-4"> Enviar temperatura </button>
+                            <button class="bg-slate-500 text-white rounded-full py-2 px-4 ml-4 " > Enviar temperatura </button>
                         </form>
-
                         @if ($dispositivo->estado == 0)
+
                         <div class="text-center relative h-48 w-48 m-1" style="margin-left: -158px;"> <!--- Switch de OFF --->
                             <p class="text-gray-600 font-bold text-lg"></p>
-                            <button class="absolute inset-0 rounded-full pb- transition-transform duration-300 ease-in-out transform mx-auto bg-gray-300 w-24 h-12 " style="top: 70%; transform: translateY(50%);margin-left: -15px ">
-                                <span class="absolute left-3 bottom-1 bg-red-100 w-20 h-10 rounded-full" ></span>
+                            <button class="absolute inset-0 rounded-full pb- transition-transform duration-300 ease-in-out transform mx-auto bg-gray-300 w-24 h-12" style="top: 70%; transform: translateY(50%); margin-left: -150px">
+                                <span class="absolute left-3 bottom-1 bg-red-100 w-20 h-10 rounded-full"></span>
                                 <span class="absolute left-1 bottom-1 text-center text-white w-12 h-10 rounded-full bg-red-500">OFF</span>
                             </button>
                         </div>
 
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "ON"]) }}" method="POST">
                             @csrf
-                            <button class="bg-green-500 text-white rounded-full py-2 px-8 ml-0 " type="submit" value="on"> Ligar </button>
+                            <button class="bg-green-500 text-white rounded-full py-2 px-7 ml-2" type="submit" value="on" style="margin-top: 168px; margin-left: -220px">Ligar</button>
                         </form>
                         @elseif ($dispositivo->estado == 1)
-                        <div class="text-center relative h-48 w-48 m-1" style="margin-left: -158px;";> <!--- Switch de ON --->
+                        <div class="text-center relative h-48 w-48 m-1" style="margin-left: -158px;" ;> <!--- Switch de ON --->
                             <p class="text-gray-600 font-bold text-lg"></p>
-                            <button class="relative w-24 h-12 bg-gray-300 rounded-full p-3 transition-transform duration-300 ease-in-out transform" style="top: 70%; transform: translateY(50%);margin-left: -15px">
+                            <button class="relative w-24 h-12 bg-gray-300 rounded-full p-3 transition-transform duration-300 ease-in-out transform" style="top: 70%; transform: translateY(50%);margin-left: -390px">
                                 <span class="absolute left-3 bottom-1 bg-green-100 w-20 h-10 rounded-full"></span>
                                 <span class="absolute left-1 bottom-1 text-center text-white bg-green-500 w-12 h-10 rounded-full">ON</span>
                             </button>
                         </div>
                         <form action="{{ route('dispositivos.estado', ['esp_id'=>$dispositivo->esp_id, 'message' => "OFF"])}}" method="POST">
                             @csrf
-                            <button class="bg-red-500 text-white rounded-full py-2 px-4 ml-2" type="submit" value="off"> Desligar </button>
+                            <button class="bg-red-500 text-white rounded-full py-2 px-5 ml-2" type="submit" value="off" style="margin-top: 169px; margin-left: -220px;"> Desligar </button>
                         </form>
                         @endif
                     </div>
