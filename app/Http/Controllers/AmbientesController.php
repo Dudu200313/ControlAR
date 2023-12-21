@@ -98,7 +98,8 @@ class AmbientesController extends Controller
 
         $ambiente->delete();
 
-        return response()->json(['message' => 'Ambiente excluído com sucesso'], 200);
+        //return response()->json(['message' => 'Ambiente excluído com sucesso'], 200);
+        return redirect(route('dashboard'));
     }
 }
 

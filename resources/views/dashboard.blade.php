@@ -10,6 +10,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
                         <a href="{{ route('dashboard', ['ambiente_id' => $ambiente->id]) }}" class="text-slate-600 font-bold text-4xl ml-2"> {{ $ambiente->nome }}</a>
+                        <!--  botão pra deletar o ambiente na dashboard  -->
+                        <form action="{{ route ('ambientes.destroy' , ['ambiente' => $ambiente->id])}}" method="POST" id="form-delete-{{ $ambiente->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button  type="submit" class="text-sm text-red-500 hover:text-gray-700 dark:text-red dark:hover:text-red-700 focus:outline-none" onclick="fecharPopUp()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                        </button>
+                        </form>
                     </li>
                     @endforeach
                 </ul>
