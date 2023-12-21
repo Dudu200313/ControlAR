@@ -55,13 +55,11 @@
   </div>
   <div class="mt-8 text-center">
     <p>&copy; 2023 ControlAR. Todos os direitos reservados.</p>
-    <p><b>Desenvolvido por:</b></p>
-    <p><b> Mateus Lopes - Github : @Mateuslpds</b></p>
-    <p><b>Ian Elton - Github : @ianq1w1</b></p>
-    <p><b>Carolayne Maria - Github : @CarolayneMR</b></p>
-    <p><b>Eduardo Silvino - Github : @Dudu200313</b></p>
-    <p><b>Guilherme Holanda - Github : @GuilhermeH6</b></p>
-    <p><b>Afonso Henrique - Github : @Afonso247</b></p>
+    <p><b>Desenvolvido por:</b></b></p>
+    <p><b> Mateus Lopes - Ian Elton </b></p>
+    <p><b>Carolayne Maria - Eduardo Silvino</b></p>
+    <p><b>Guilherme Holanda - Afonso Henrique </b></p>
+    
   </div>
 </footer>
 
