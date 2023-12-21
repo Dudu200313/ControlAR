@@ -42,10 +42,9 @@
       <p>Email: contato@controlar.com</p>
       <p>Telefone: (11) 1234-5678</p>
     </div>
-    <div class="mb-4 md:mb-0">
-      <h2 class="text-2xl font-bold">Localização</h2>
-      <p>Rua da Loja, 123</p>
-      <p>Cidade, Estado</p>
+    <div class=" text-center mb-4 md:mb-0">
+      <h2 class="text-2xl font-bold">Desenvolvido por:</h2>
+      <p><b> Mateus Lopes - Ian Elton - Carolayne Maria - Eduardo Silvino</br> - Guilherme Holanda - Afonso Henrique </b></p>
     </div>
     <div>
       <h2 class="text-2xl font-bold">Redes Sociais</h2>
@@ -55,11 +54,6 @@
   </div>
   <div class="mt-8 text-center">
     <p>&copy; 2023 ControlAR. Todos os direitos reservados.</p>
-    <p><b>Desenvolvido por:</b></b></p>
-    <p><b> Mateus Lopes - Ian Elton </b></p>
-    <p><b>Carolayne Maria - Eduardo Silvino</b></p>
-    <p><b>Guilherme Holanda - Afonso Henrique </b></p>
-    
   </div>
 </footer>
 
